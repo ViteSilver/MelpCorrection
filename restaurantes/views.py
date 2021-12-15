@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from restaurantes.serializers import RestaurantSerializer
 from restaurantes.models import Restaurants
+from statistics import mean, stdev
+from geopy.distance import geodesic
 
 @api_view(['GET','POST'])
 def restaurants_api_view(request):
@@ -51,3 +53,15 @@ def restaurant_detail_view(request,pk):
             return Response({'message':'Usuario eliminado'}, status = status.HTTP_200_OK)
         
     return Response({'message':'No se ha encontrado el usuario'}, status = status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def task_2(request):
+    restaurant = Restaurants.objects.all()
+    if restaurant:
+        if request.method == 'GET':
+            query = request.query_params
+            result = [elem for elem in restaurant if float(geodesic((elem.lat,elem.lng),(query['latitude'],query['longitude'])).km) < float(query['radius'])]
+            avg = mean([elem.rating for elem in result])
+            stddev = stdev([elem.rating for elem in result])
+            return Response({'count':len(result),'avg':avg,'stddev':stddev},status= status.HTTP_200_OK)
+    return Response({'message':'Sin datos'}, status = status.HTTP_400_BAD_REQUEST)

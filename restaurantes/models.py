@@ -5,7 +5,7 @@ class Restaurants(models.Model):
     id = models.TextField(primary_key=True)
     rating = models.IntegerField(null=True)
     name = models.CharField(max_length=150,null=True)
-    site = models.CharField(max_length=150, unique = True,null=True)
+    site = models.CharField(max_length=150,null=True)
     email = models.EmailField('Correo electronico', max_length=150,null=True)
     phone = models.CharField(max_length=30,null=True)
     street = models.TextField(null=True)
