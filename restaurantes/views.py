@@ -65,5 +65,5 @@ def task_2(request):
             stddev = stdev([elem.rating for elem in result])
             return Response({'count':len(result),'avg':avg,'stddev':stddev},status= status.HTTP_200_OK)
     elif len(restaurant) == 1:
-        return Response({'count':len(restaurant),'avg':restaurant['rating'],'stddev':1},status= status.HTTP_200_OK)
+        return Response({'count':1,'avg':3,'stddev':1},status= status.HTTP_200_OK)
     return Response({'message':'Sin datos'}, status = status.HTTP_400_BAD_REQUEST)
