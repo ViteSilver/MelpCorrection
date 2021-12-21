@@ -57,11 +57,13 @@ def restaurant_detail_view(request,pk):
 @api_view(['GET'])
 def task_2(request):
     restaurant = Restaurants.objects.all()
-    if restaurant:
+    if restaurant & (len(restaurant) > 1):
         if request.method == 'GET':
             query = request.query_params
             result = [elem for elem in restaurant if float(geodesic((elem.lat,elem.lng),(query['latitude'],query['longitude'])).km) < float(query['radius'])]
             avg = mean([elem.rating for elem in result])
             stddev = stdev([elem.rating for elem in result])
             return Response({'count':len(result),'avg':avg,'stddev':stddev},status= status.HTTP_200_OK)
+    elif len(restaurant) == 1:
+        return Response({'count':len(restaurant),'avg':restaurant.rating,'stddev':1},status= status.HTTP_200_OK)
     return Response({'message':'Sin datos'}, status = status.HTTP_400_BAD_REQUEST)
