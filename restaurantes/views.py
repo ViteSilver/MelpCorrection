@@ -57,7 +57,7 @@ def restaurant_detail_view(request,pk):
 @api_view(['GET'])
 def task_2(request):
     restaurant = Restaurants.objects.all()
-    if restaurant & (len(restaurant) > 1):
+    if len(restaurant) > 1:
         if request.method == 'GET':
             query = request.query_params
             result = [elem for elem in restaurant if float(geodesic((elem.lat,elem.lng),(query['latitude'],query['longitude'])).km) < float(query['radius'])]
