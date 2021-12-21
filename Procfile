@@ -1,0 +1,1 @@
+web: gunicorn melp_project.wsgi --log-file -
