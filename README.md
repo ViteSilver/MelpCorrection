@@ -3,7 +3,7 @@ Improve the melp App
 
 Test_back_end
 
-Implement CRUD using Django and REST Framework.
+Implement CRUD using Django and REST Framework with function views and decorators.
 
 The Heroku link to review the API, this endpoint show all the elements and post new ones in a JSON format:
 
