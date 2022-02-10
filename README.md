@@ -1,5 +1,7 @@
-# MelpCorrection
+# Melp Back-end
 Improve the melp App
+
+This code was created in order to use Django API REST and a custom endpoint.
 
 Test_back_end
 
